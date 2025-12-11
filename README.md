@@ -35,10 +35,10 @@ The algorithm is developed using MATLAB and relies on external functionality fro
 
 ## Docker
 
-CTseg can be run from a Docker image, which does *not* require you to have MATLAB installed on your computer. Simply build an image from the `Dockerfile` in this repository:
+CTseg can be run with Docker, which does *not* require you to have MATLAB installed on your computer. First build the image:
 
 ```bash
-docker build -t ubuntu:ctseg -f CTseg/Dockerfile .
+docker build -t ubuntu:ctseg .
 ```
 
 CTseg can then be run, for example, by:
