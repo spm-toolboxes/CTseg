@@ -437,12 +437,6 @@ if nargout > 1
     tc = tc0;
 end
 
-% % Reslice template space segmentations to MNI space
-% % (only needed when using default template, which is not in SPM space)
-% if use_default_mu
-%     reslice2mni(res,pth_Mmni,Mmu);
-% end
-
 if correct_header
     % Reslice corrected native space segmentations to original native space.
     M1  = spm_get_space(Nii(1).dat.fname);  % get corrected orientation matrix
@@ -467,15 +461,6 @@ end
 if correct_header
     M0 = spm_get_space(dat(1).psi.dat.fname);
     spm_get_space(dat(1).psi.dat.fname, Mc\M0);
-end
-
-% Mask out-of-FOV voxels in native space segmentations by checking, for
-% each native voxel, whether the forward deformation maps it inside the
-% atlas FOV.
-for k = 1:K-1
-    if ~isempty(res.c{k})
-        spm_CTseg_util('mask_outside_fov_def', pth_mu, res.c{k}, dat(1).psi.dat.fname);
-    end
 end
 
 res.s = '';
